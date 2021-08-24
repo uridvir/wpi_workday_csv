@@ -1,11 +1,11 @@
 {
     "manifest_version": 2,
-    "name": "WPI BannerWeb to CSV",
-    "version": "1.1.4",
-    "description": "A browser extension that allows WPI students to download their BannerWeb schedule as a CSV file.",
+    "name": "WPI Workday to CSV",
+    "version": "1.0",
+    "description": "A browser extension that allows WPI students to download their Workday schedule as a CSV file.",
     "content_scripts": [
         {
-            "matches": ["https://bannerweb.wpi.edu/pls/prod/*"],
+            "matches": ["https://wd5.myworkday.com/wpi/d/task/*"],
             "js": ["content.js"]
         }
     ],
@@ -23,7 +23,7 @@
     ],
     "permissions": [
         "downloads",
-        "https://bannerweb.wpi.edu/pls/prod/*",
+        "https://wd5.myworkday.com/wpi/d/task/*",
         "https://www.wpi.edu/offices/registrar/calendar"
     ],
     "icons": {
