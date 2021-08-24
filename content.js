@@ -2,11 +2,11 @@ main_code = function(){
     //Check that we're on View My Courses
     var text
     try {
+        console.log("hi")
         text = document.getElementsByClassName('WCUK')[0].title
+        console.log("Workday to CSV found text \"" + text + "\"")
     }
-    catch (e){
-        return "not set up"
-    }
+    catch (e){}
     if (text == 'View My Courses'){
         //Do imports before running anything
         console.log("Entered main code")
@@ -48,18 +48,10 @@ main_code = function(){
             button.style.backgroundColor = "#003366"
             document.body.insertBefore(button, document.body.children[0])
         })
-        return "set up"
     }
-    return "not set up"
+
 }
 
-var tries = 0
-var try_main = function(){
-    var result = main_code()
-    if(result == "not set up" && tries < 100){
-        tries++
-        window.setTimeout(try_main, 100)
-    }
+window.onload = function(){
+    window.setTimeout(main_code, 10000);
 }
-
-window.onload = try_main
