@@ -53,5 +53,5 @@ main_code = function(){
 }
 
 window.onload = function(){
-    window.setTimeout(main_code, 10000);
+    window.setTimeout(main_code, 5000);
 }
