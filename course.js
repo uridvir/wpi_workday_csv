@@ -1,54 +1,38 @@
 class Course {
-    constructor(data){
-        if (data.length == 0 || data[0].length != 12){
-            console.log('data.length = ' + data.length)
-            console.log('data[0].length = ' + data[0].length)
-            throw 'Course constructed with invalid data!'
-        }
-        this.courseString = data[0][1]
-        this.title = data[0][2]
-        this.startDate = data[0][6]
-        this.endDate = data[0][7]
-        //Collects together the properties that change between lines
-        this.collectedArray = []
+    constructor(line){
+        this.name = line[4]
+        this.format = line[5]
+        this.startDate = line[9]
+        this.endDate = line[10]
+
         var daysReformat = function(days) {
             var result = []
-            for (var i = 0; i < days.length; i++){
-                let day = days[i].toLowerCase()
-                if (day == 'm'){
-                    result.push(1)
-                }
-                if (day == 't'){
-                    result.push(2)
-                }
-                if (day == 'w'){
-                    result.push(3)
-                }
-                if (day == 'r'){
-                    result.push(4)
-                }
-                if (day == 'f'){
-                    result.push(5)
-                }
+            let lower_days = days.toLowerCase()
+            if (lower_days.includes('m')){
+                result.push(1)
+            }
+            if (lower_days.includes('t')){
+                result.push(2)
+            }
+            if (lower_days.includes('w')){
+                result.push(3)
+            }
+            if (lower_days.includes('r')){
+                result.push(4)
+            }
+            if (lower_days.includes('f')){
+                result.push(5)
             }
             return result
         }
-        for (var i = 0; i < data.length; i++){
-            //This addresses issue #6 (see the GitHub)
-            if (data[i][9] == 'TBA'){
-                this.collectedArray.push({valid: false})
-                continue
-            }
-            let times = data[i][9].split('-')
-            let collected = {
-                days: daysReformat(data[i][8]),
-                startTime: times[0].trim(),
-                endTime: times[1].trim(),
-                location: data[i][10],
-                valid: true
-            }
-            this.collectedArray.push(collected)
-        }
+
+        let days_time_location = line[6].split('|')
+        let times = days_time_location[1].split('-')
+        this.days = daysReformat(days_time_location[0]),
+        this.startTime = times[0].trim(),
+        this.endTime = times[1].trim(),
+        this.location = days_time_location[2].trim(),
+        this.valid = true
     }
 
     /*
@@ -78,22 +62,20 @@ class Course {
                 }
             }
             if (!isDayOff){
-                for (var i = 0; i < this.collectedArray.length; i++){
-                    if (!this.collectedArray[i].valid){
-                        continue
-                    }
-                    for (var j = 0; j < this.collectedArray[i].days.length; j++){
-                        if (this.collectedArray[i].days[j] == correctDay){
+                if (this.valid){
+                    for (var j = 0; j < this.days.length; j++){
+                        if (this.days[j] == correctDay){
                             let month = currentDate.getMonth() + 1
                             let date = currentDate.getDate()
                             let year = currentDate.getUTCFullYear()
-                            entries += '\"' + this.courseString + '\"' + ','
+                            entries += '\"' + this.name + '\"' + ','
                             entries += month + '/' + date + '/' + year + ','
-                            entries += this.collectedArray[i].startTime + ','
+                            entries += this.startTime + ','
                             entries += month + '/' + date + '/' + year + ','
-                            entries += this.collectedArray[i].endTime + ','
-                            entries += '\"' + this.title + '\"' + ','
-                            entries += '\"' + this.collectedArray[i].location + '\"' + '\n'
+                            entries += this.endTime + ','
+                            entries += '\"' + this.format + '\"' + ','
+                            entries += '\"' + this.location + '\"' + '\n'
+                            break
                         }
                     }
                 }

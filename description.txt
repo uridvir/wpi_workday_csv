@@ -1,13 +1,8 @@
-This extension will download courses from one semester (two WPI terms) to a CSV file. This file can be imported into Google Calendar. To use: log in to BannerWeb and click Student Services & Financial Aid -> Registration -> Concise Student Schedule. Next select a semester and click the "Export to CSV" button. The downloaded file can be imported into Google Calendar.
+This extension will download courses from one semester (two WPI terms) to a CSV file.
 
-Note: this extension only works on WPI BannerWeb.
+Note: this extension only works on WPI Workday.
 
-Code may be found at https://github.com/uridvir/wpi_bannerweb_csv
+Code may be found at https://github.com/uridvir/wpi_workday_csv
 
 Changelog:
 1.0: First release!
-1.1: Day-off and special schedule day detection added (also now available on Firefox)
-1.1.1: Removed annoying console.log calls
-1.1.2: Fixed courses with TBA times crashing
-1.1.3: Fixed commas in course title corrupting data
-1.1.4: Fixed issue caused by updated calendar page

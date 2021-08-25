@@ -11,26 +11,13 @@ main_code = function(){
             var table = document.getElementsByClassName('mainTable')[0].children[3]
             window.exportAction = function() {
                 var fileContents = '"Subject","Start Date","Start Time","End Date","End Time","Description","Location"\n'
-                /*
-                data contains the necessary lines from the table to create a Course object.
-                Since courses can have multiple meeting times, the data array may need to be multiple lines long.
-                 */
-                var data = []
-                for (var row = 1; row < table.children.length - 1; row++){
-                    //If a row starts blank, treat it as another line of data for the course being constructed
-                    if (table.children[row].children[0].innerText.trim().length != 0){
-                        if (data.length != 0){
-                            fileContents += new Course(data).formatAsEntries()
-                        }
-                        data = []
-                    }
+                for (var row = 0; row < table.children.length; row++){        
                     var line = []
                     for (var column = 0; column < 12; column++){
                         line.push(table.children[row].children[column].innerText)
                     }
-                    data.push(line)
+                    fileContents += new Course(line).formatAsEntries()
                 }
-                fileContents += new Course(data).formatAsEntries()
                 //Use the background script powers of download.js to access the downloads API
                 chrome.runtime.sendMessage({greeting: 'download', data: fileContents})
             }
