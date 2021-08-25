@@ -2,14 +2,11 @@ main_code = function(){
     //Check that we're on View My Courses
     var text
     try {
-        console.log("hi")
         text = document.getElementsByClassName('WCUK')[0].title
-        console.log("Workday to CSV found text \"" + text + "\"")
     }
     catch (e){}
     if (text == 'View My Courses'){
         //Do imports before running anything
-        console.log("Entered main code")
         chrome.runtime.sendMessage({greeting: 'imports'}, function(response){
             var table = document.getElementsByClassName('mainTable')[0].children[3]
             window.exportAction = function() {
