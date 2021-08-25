@@ -1,4 +1,4 @@
-This extension will download courses from one semester (two WPI terms) to a CSV file.
+This extension will download courses from one semester (two WPI terms) to a CSV file. To use, navigate to the View My Courses page (see WPI's website if you need help with this). Then wait a few seconds for the extension to load, and hit the export button. Import the CSV into your calendar program of choice (all times are in US Eastern).
 
 Note: this extension only works on WPI Workday.
 

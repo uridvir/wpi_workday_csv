@@ -2,16 +2,18 @@ main_code = function(){
     //Check that we're on View My Courses
     var text
     try {
+        console.log("Trying to find \"View My Courses\"")
         text = document.getElementsByClassName('WCUK')[0].title
     }
     catch (e){}
     if (text == 'View My Courses'){
         //Do imports before running anything
+        console.log("Found \"View My Courses\"")
         chrome.runtime.sendMessage({greeting: 'imports'}, function(response){
             var table = document.getElementsByClassName('mainTable')[0].children[3]
             window.exportAction = function() {
                 var fileContents = '"Subject","Start Date","Start Time","End Date","End Time","Description","Location"\n'
-                for (var row = 0; row < table.children.length; row++){        
+                for (var row = 0; row < table.children.length; row++){
                     var line = []
                     for (var column = 0; column < 12; column++){
                         line.push(table.children[row].children[column].innerText)
@@ -36,6 +38,4 @@ main_code = function(){
 
 }
 
-window.onload = function(){
-    window.setTimeout(main_code, 5000);
-}
+window.setTimeout(main_code, 10000);
