@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "WPI Workday to CSV",
-    "version": "1.0",
+    "version": "1.0.1",
     "description": "A browser extension that allows WPI students to download their Workday schedule as a CSV file.",
     "content_scripts": [
         {
